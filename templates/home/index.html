@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+    {% block title %}Forums{% endblock %}
+{% block data %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}"  >
+<div class="manvzu-container">
+    {% for t in topics %}
+        <div class="middle menu">
+            <h1>{{ t.title }}</h1>
+            <p>{{ t.user }}</p>
+            <a href="{% url 'detail' t.id %}">Batafsil</a>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock data %}
