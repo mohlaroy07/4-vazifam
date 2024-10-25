@@ -7,6 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <title>{% block title %}Forums{% endblock %}</title>
+
+    <style>
+        header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-inline: 2rem;
+        }
+
+        header  .container ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        header .container h1 {
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,23 +35,22 @@
         <div class="container">
             <h1><a href="{% url 'homepage' %}">Home</a></h1>
 
-            <nav>
-                <ul>
-                    <li><a href="{% url 'homepage' %}">Home</a></li>
 
-                    {% if user.is_authenticated %}
-                    <h1><a href="{% url 'create_topic' %}">Mavzu yaratish</a></h1>
-                    <li><a href="{% url 'log_out' %}">Logout</a></li>
-                    {% else %}
-                    <li><a href="{% url 'user_login' %}">Login</a></li>
-                    <li><a href="{% url 'register' %}">Register</a></li>
+            <ul>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'create_topic' %}">Mavzu yaratish</a></li>
+                <li><a href="{% url 'profile' request.user.id %}">Profil</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'user_login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
 
-                    {% endif %}
-                </ul>
-            </nav>
+                {% endif %}
+            </ul>
+
         </div>
     </header>
-
+    <hr>
     <!-- Main content block -->
     <main>
         {% block data %}
@@ -40,6 +59,8 @@
         {% endblock data %}
 
     </main>
+
+    <hr>
 
     <!-- Footer -->
     <footer>

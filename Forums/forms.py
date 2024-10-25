@@ -6,20 +6,10 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 
 class TopicForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
 
     class Meta:
         model = Topic
-        fields = ["title", "user"]
-        widgets = {
-            "title": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Mavzu"}
-            ),
-            "user": forms.Textarea(
-                attrs={"class": "form-control", "placeholder": "Foydalanuvchi"}
-            ),
-        }
+        fields = ["title"]
 
 
 class RegisterForm(forms.ModelForm):
@@ -86,27 +76,8 @@ class LoginForm(forms.Form):
             attrs={"class": "form-control", "placeholder": "Password"}
         )
     )
-    password2 = forms.CharField(
-        widget=forms.PasswordInput(
-            attrs={"class": "form-control", "placeholder": "Password again"}
-        )
-    )
-    remember_me = forms.BooleanField(
-        required=False, widget=forms.CheckboxInput(attrs={"class": "form-control"})
-    )
-
-    class Meta:
-        model = User
-        fields = ["username", "password"]
-        widgets = {
-            "username": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Username"}
-            ),
-            "password": forms.PasswordInput(
-                attrs={"class": "form-control", "placeholder": "Password"}
-            ),
-        }
-
+   
+  
 
 class CommentForm(forms.Form):
     content = forms.CharField(

@@ -1,5 +1,13 @@
 from django.urls import path
-from .views import homepage, create_topic, topic_detail, register, user_login, log_out
+from .views import (
+    homepage,
+    create_topic,
+    topic_detail,
+    register,
+    user_login,
+    log_out,
+    profile,
+)
 
 urlpatterns = [
     path("", homepage, name="homepage"),
@@ -8,4 +16,5 @@ urlpatterns = [
     path("login/", user_login, name="user_login"),
     path("register/", register, name="register"),
     path("logout/", log_out, name="logout"),
+    path("profile/<int:user_id>/", profile, name="profile"),
 ]

@@ -1,26 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
-    {% block title %} {{ topic.title }} {% endblock %}
+{% block title %} {{ topic.title }} {% endblock %}
 {% block data %}
 <link rel="stylesheet" href="{% static 'css/detail.css' %}">
 <div class="detail-box">
 
     <h2>{{ topic.title }}</h2>
 
-    
+    <hr>
 
-    <p>{{ topic.user }}</p>
+    {% for comment in comments %}
 
+    <div class="box">
+        <b>{{ comment.user.username }}:</b>
+        <span>{{ comment }}</sp>
+    </div>
 
+    {% endfor %}
 
     {% if user.is_authenticated %}
     <form method="POST">
         {% csrf_token %}
-        <textarea name="content" placeholder="Write lessons..." required></textarea>
+        <textarea name="content" placeholder="Write comments..." required></textarea>
         <button type="submit">Topic</button>
     </form>
     {% else %}
-    <p>Please <a href="{% url 'login' %}">log in</a> to topic.</p>
+    <p>Please <a href="{% url 'user_login' %}">log in</a> to topic.</p>
     {% endif %}
 </div>
 {% endblock data %}
